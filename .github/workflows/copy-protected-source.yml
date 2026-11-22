@@ -1,0 +1,54 @@
+name: Copy protected source into TECHNOVA
+
+on:
+  push:
+    branches:
+      - import/heartcode-scanner-academy
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  copy-source:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out TECHNOVA
+        uses: actions/checkout@v4
+        with:
+          ref: import/heartcode-scanner-academy
+          fetch-depth: 0
+          submodules: false
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch the exact original source revisions
+        shell: bash
+        run: |
+          git fetch https://github.com/heartcode2010/HEARTCODE.git 50946857a2d2a7e92052c995579a3f06e30dbf67
+          HEARTCODE_SHA="$(git rev-parse FETCH_HEAD)"
+          git fetch https://github.com/heartcode2010/dark-obsydia-ai.git cd74724f930170abf04d2eeb3f10ee56459c38ee
+          OBSYDIA_SHA="$(git rev-parse FETCH_HEAD)"
+          echo "HEARTCODE_SHA=$HEARTCODE_SHA" >> "$GITHUB_ENV"
+          echo "OBSYDIA_SHA=$OBSYDIA_SHA" >> "$GITHUB_ENV"
+
+      - name: Replace submodule pointers with complete local source trees
+        shell: bash
+        run: |
+          git rm -f .gitmodules vendor/heartcode-original vendor/dark-obsydia-ai
+          mkdir -p modules
+          git read-tree --prefix=modules/heartcode/ -u "$HEARTCODE_SHA"
+          git read-tree --prefix=modules/obsydia-ai/ -u "$OBSYDIA_SHA"
+          git add -A
+          git commit -m "Copy complete HEARTCODE and Dark Obsydia AI source into TECHNOVA"
+          git push origin HEAD:import/heartcode-scanner-academy
+
+      - name: Report copied source revisions
+        run: |
+          echo "HEARTCODE source: $HEARTCODE_SHA"
+          echo "Dark Obsydia AI source: $OBSYDIA_SHA"
+          echo "Both source trees are now stored as ordinary files inside this TECHNOVA repository."
