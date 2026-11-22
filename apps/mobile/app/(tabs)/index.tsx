@@ -18,7 +18,7 @@ export default function HomeScreen() {
     <View style={s.quickGrid}>
       {featured.map((slug,i)=>{const m=modules.find(x=>x.slug===slug)!;return <Link key={slug} href={{pathname:"/module/[slug]",params:{slug}}} asChild><Pressable style={s.quickCard}><Text style={s.quickGlyph}>{["✦","◈","▤","!","⌁","↗","▣"][i]}</Text><Text style={s.quickName}>{m.name}</Text><Text style={s.quickDesc}>{m.description}</Text><Text style={s.open}>OPEN  ↗</Text></Pressable></Link>;})}
     </View>
-    <View style={s.sectionHead}><Text style={s.sectionTitle}>Explore TECHNOVA</Text><Tag soft>{modules.length} SERVICES</Tag></View>
+    <View style={s.sectionHead}><Text style={s.sectionTitle}>Explore TECHNOVA</Text><Tag soft>{String(modules.length) + " SERVICES"}</Tag></View>
     <TextInput value={query} onChangeText={setQuery} placeholder="Search tools, learning, business…" placeholderTextColor={theme.colors.muted} style={s.search} />
     <FlatList scrollEnabled={false} data={results} keyExtractor={item=>item.slug} renderItem={({item})=><Link href={{pathname:"/module/[slug]",params:{slug:item.slug}}} asChild><Pressable style={s.listRow}><View style={s.listIcon}><Text style={s.listGlyph}>{item.pillar==="PROTECT"?"◈":item.pillar==="LEARN"?"▤":item.pillar==="EARN"?"↗":"⌘"}</Text></View><View style={{flex:1}}><Text style={s.listName}>{item.name}</Text><Text style={s.listDesc}>{item.description}</Text></View><Text style={s.chevron}>›</Text></Pressable></Link>} ListEmptyComponent={<Text style={s.empty}>No services match that search.</Text>} />
     <View style={s.footer}><Text style={s.footerTitle}>Built for Nigerian realities.</Text><Text style={s.footerCopy}>Low-data by design. Naira-first. Ready to grow beyond Nigeria.</Text></View>
