@@ -4,54 +4,63 @@
 
 Nigeria-first digital problem-solving and opportunity ecosystem by Heartcode Technologies.
 
-## Current implementation status
+## Repository structure
 
-This repository is being built in release waves. The current branch contains the first React/Vite/TypeScript application shell and responsive Corporate Editorial interface for the first product areas. It is not yet production-ready or deployed.
+TECHNOVA contains ordinary, locally stored copies of the protected source repositories:
 
-### Implemented in the current UI foundation
+- modules/heartcode/ — complete HEARTCODE source snapshot, including Scanner, Cyber Academy, frontend, backend, assets and manifests.
+- modules/obsydia-ai/ — complete Dark Obsydia AI source snapshot, including frontend, backend, tests, deployment files, assets, LICENSE and NOTICE.
+
+These are real files committed inside TECHNOVA, not Git submodules, links, or runtime dependencies on the original repositories. The upstream projects remain unchanged. The exact source revisions are recorded in docs/VERIFIED_SOURCE_LOCK.md.
+
+## Current TECHNOVA application status
+
+The root application is a React/Vite/TypeScript foundation with a responsive Corporate Editorial interface and initial pathways into Protect, FixIt, Opportunities, Portfolio and Business.
+
+The original Scanner, Cyber Academy and Dark Obsydia AI code is now physically present in this repository. That source-copy milestone does not mean those applications have already been merged into one runtime or connected to the root TECHNOVA UI.
+
+## Implemented in the current UI foundation
+
 - Responsive TECHNOVA shell and compact navigation.
 - Overview pathways into Protect, FixIt, Opportunities, Portfolio and Business.
-- Protect area distinguishes new TECHNOVA work from the original HEARTCODE Scanner and Cyber Academy, whose service integration is pending.
+- Protect area distinguishes new TECHNOVA work from the original Scanner and Academy.
 - FixIt intake draft UI (not yet account-backed or persisted).
 - Opportunity Radar empty state (no fabricated live listings).
 - Portfolio session drafts (not yet account-backed or persisted).
 - Business Launchpad / SME Health Check status presentation.
 
-### Not yet implemented or verified
-- Authentication and connected database for this React app.
+## Not yet implemented or verified
+
+- Authentication and connected database for the root React app.
 - Server-side ScamShield analysis, FixIt recommendations and saved cases.
 - Verified live opportunity ingestion and moderation.
 - Persistent portfolio and SME assessment workflows.
-- Unified NOVA provider integration.
-- Runtime deployment of HEARTCODE and Dark Obsydia services.
-- Automated tests, production build verification and deployment.
+- Unified NOVA provider integration using the copied Dark Obsydia AI service.
+- Isolated runtime deployment and end-to-end integration of the copied HEARTCODE and Dark Obsydia applications.
+- Full automated tests, production build verification and production deployment.
 
-## Protected upstream products
+## Local development
 
-The original repositories are preserved as Git submodules. Do not alter protected Scanner or Academy source as part of TECHNOVA UI work.
-- HEARTCODE: vendor/heartcode-original
-- Dark Obsydia AI: vendor/dark-obsydia-ai
-
-Clone with submodules enabled:
-
-```bash
-git clone --recurse-submodules https://github.com/heartcode2010/TECHNOVA.git
+~~~bash
+git clone https://github.com/heartcode2010/TECHNOVA.git
 cd TECHNOVA
 git checkout import/heartcode-scanner-academy
-git submodule update --init --recursive
-npm ci
+npm install
 npm run dev
-```
+~~~
+
+The copied applications have their own package manifests and may require their own runtime configuration. Do not assume the root npm install starts those independent applications.
 
 ## Commands
-- npm run dev — local development
-- npm run typecheck — TypeScript check
-- npm run build — production build
-- npm run preview — preview production output
+
+- npm run dev — root TECHNOVA development server
+- npm run typecheck — root TypeScript check
+- npm run build — root production build
+- npm run preview — preview root production output
 
 ## Deployment
 
-A Netlify configuration is included. Deploy only after build and typecheck pass in a clean checkout. This configuration does not mean a Netlify site has been created or deployed.
+A Netlify configuration is included. A separate TECHNOVA deployment must be created and verified; the existing Heartcode site must not be overwritten. No production deployment is claimed until the root build and the integrated product journeys pass their release checks.
 
 ## Product scope and governance
 
