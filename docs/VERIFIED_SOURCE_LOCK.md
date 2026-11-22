@@ -1,34 +1,36 @@
-# Verified upstream source locks
+# Verified copied source revisions
 
 Checked 22 November 2026.
 
-TECHNOVA branch: `import/heartcode-scanner-academy`
+TECHNOVA branch: import/heartcode-scanner-academy
 
-The branch contains Git submodule entries in `.gitmodules`. These pin the complete upstream repositories at exact commits; they are not partial hand-copied source directories.
+Both source repositories are stored as ordinary files inside this TECHNOVA repository. There is no .gitmodules file and no Git submodule pointer.
 
-| TECHNOVA path | Upstream repository | Pinned commit | Verification |
-|---|---|---|---|
-| `vendor/heartcode-original` | `https://github.com/heartcode2010/HEARTCODE.git` | `50946857a2d2a7e92052c995579a3f06e30dbf67` | Matches HEARTCODE `main` at verification time |
-| `vendor/dark-obsydia-ai` | `https://github.com/heartcode2010/dark-obsydia-ai.git` | `cd74724f930170abf04d2eeb3f10ee56459c38ee` | Matches dark-obsydia-ai `main` at verification time |
+| TECHNOVA path | Upstream repository | Exact source commit | Files copied |
+|---|---|---|---:|
+| modules/heartcode/ | https://github.com/heartcode2010/HEARTCODE | 50946857a2d2a7e92052c995579a3f06e30dbf67 | 246 |
+| modules/obsydia-ai/ | https://github.com/heartcode2010/dark-obsydia-ai | cd74724f930170abf04d2eeb3f10ee56459c38ee | 181 |
 
-## What this means
+## Verification
 
-- The complete HEARTCODE repository is pinned, including its existing Vulnerability Scanner and Cyber Academy source trees, assets, package manifests, and supporting backend/frontend code.
-- The complete Dark Obsydia AI repository is pinned, including its frontend, backend, tests, deployment files, package manifests, LICENSE, and NOTICE.
-- The original repositories are not modified by this TECHNOVA branch.
-- The submodules must be checked out when cloning: `git clone --recurse-submodules https://github.com/heartcode2010/TECHNOVA.git`, then check out this branch and run `git submodule update --init --recursive`.
+The TECHNOVA Git tree was checked after the copy workflow completed:
+- 246 ordinary file entries exist under modules/heartcode/.
+- 181 ordinary file entries exist under modules/obsydia-ai/.
+- No Git submodule entries remain.
+- .gitmodules is absent.
+- The source copy includes original frontend/backend source, package manifests, lockfiles, static assets and documentation. Dark Obsydia AI's LICENSE and NOTICE are present.
+
+The copy workflow fetches the exact upstream commits, reads each complete source tree into its own TECHNOVA path, commits the ordinary files, and pushes the result to this branch. It does not edit either upstream repository.
 
 ## Important distinction
 
-The submodule pins preserve the exact full upstream source at the listed commits. They do not mean the source has been flattened into ordinary TECHNOVA files, combined into a single installable application, or deployed. Do not remove the submodule references or rewrite protected source files as part of integration.
+This completes the repository-level source copy. It does not mean both applications have been merged into one installable root package, connected to the TECHNOVA authentication/data layer, configured with production secrets, or deployed as running services.
 
-## Remaining engineering work
+## Integration rules
 
-1. Clone and initialise both submodules in the build environment.
-2. Audit both projects' manifests, environment requirements, scripts, licences, security boundaries, and runtime compatibility.
-3. Keep the scanner and Academy source immutable; expose them through isolated integration boundaries.
-4. Integrate Dark Obsydia as the NOVA foundation using additive adapters and explicit authentication/tenant boundaries.
-5. Implement TECHNOVA modules in release waves, with real persistence, permissions, validation, monitoring, tests, and mobile QA.
-6. Configure a Netlify site connected to the TECHNOVA repository and deploy only after a reproducible build and test run.
-
-No claim of a completed integrated application, successful end-to-end tests, or production deployment is made by this source-lock record.
+1. Preserve the copied Scanner and Cyber Academy files exactly. Do not redesign, refactor, relocate or rewrite them.
+2. Keep runtime adapters and TECHNOVA-specific integration code outside the protected source snapshots.
+3. Integrate Dark Obsydia AI as the intended NOVA foundation through explicit, authenticated service boundaries.
+4. Audit runtime versions, environment variables, authentication, file storage, billing, AI provider configuration, sandboxing and tenant isolation before exposing services.
+5. Keep source refreshes pinned to reviewed commits and update this manifest when revisions change.
+6. Do not claim successful integration or production readiness until end-to-end tests pass.
