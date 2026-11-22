@@ -1,0 +1,8 @@
+import { useEffect,useState } from "react";
+import { Link,Stack,useLocalSearchParams } from "expo-router";
+import { ScrollView,Text } from "react-native";
+import { useAuth } from "@/auth/AuthContext";import { authStyles as s } from "@/auth/authStyles";import { theme } from "@/theme";
+export default function VerifyEmailScreen(){const {token}=useLocalSearchParams<{token?:string}>();const {verifyEmail,apiConfigured}=useAuth();const [message,setMessage]=useState("Checking verification link…");const [error,setError]=useState(false);
+ useEffect(()=>{let active=true;(async()=>{if(!token){setMessage("Verification token is missing.");setError(true);return;}if(!apiConfigured){setMessage("The account API is not connected in this build.");setError(true);return;}try{setMessage(await verifyEmail(token));}catch(e){setMessage(e instanceof Error?e.message:"Verification failed.");setError(true);}})();return()=>{active=false};},[token,apiConfigured,verifyEmail]);
+ return <><Stack.Screen options={{headerShown:true,title:"Verify email",headerTintColor:theme.colors.ink,headerStyle:{backgroundColor:theme.colors.paper},headerShadowVisible:false}}/><ScrollView style={s.page} contentContainerStyle={s.body}><Text style={s.eyebrow}>ACCOUNT SECURITY</Text><Text style={s.title}>Email verification</Text><Text style={error?s.error:s.success}>{message}</Text><Link href="/login" style={s.link}>Continue to sign in</Link></ScrollView></>;
+}
