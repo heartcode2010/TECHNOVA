@@ -47,7 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const refreshSession = useCallback(async (tokens: TokenPair) => {
     const next = await apiRequest<TokenPair & { user: AuthUser }>("/api/v1/auth/refresh", { refreshToken: tokens.refreshToken });
-    await saveTokens(next);
+    await saveTokens({ accessToken: next.accessToken, refreshToken: next.refreshToken });
     return next;
   }, []);
   useEffect(() => {
@@ -78,7 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = useCallback(async (email: string, password: string) => {
     const result = await apiRequest<TokenPair & { user: AuthUser }>("/api/v1/auth/login", { email: email.trim(), password });
-    await saveTokens(result);
+    await saveTokens({ accessToken: result.accessToken, refreshToken: result.refreshToken });
     setUser(result.user);
   }, []);
   const register = useCallback(async (name: string, email: string, password: string) => {
