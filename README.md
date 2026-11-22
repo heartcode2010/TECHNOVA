@@ -2,60 +2,57 @@
 
 **Learn. Protect. Build. Earn. Innovate.**
 
-TECHNOVA is the Nigeria-first digital problem-solving ecosystem defined by the owner's **TECHNOVA Master Product Vision & Full Build Prompt** (21 November 2026).
+Nigeria-first digital problem-solving and opportunity ecosystem by Heartcode Technologies.
 
-## Protected source code — imported without rewriting
+## Current implementation status
 
-This repository pins two upstream codebases as Git submodules:
+This repository is being built in release waves. The current branch contains the first React/Vite/TypeScript application shell and responsive Corporate Editorial interface for the first product areas. It is not yet production-ready or deployed.
 
-- `vendor/heartcode-original` → [heartcode2010/HEARTCODE](https://github.com/heartcode2010/HEARTCODE), commit `50946857a2d2a7e92052c995579a3f06e30dbf67`. This contains the existing Vulnerability Scanner and Cyber Academy.
-- `vendor/dark-obsydia-ai` → [heartcode2010/dark-obsydia-ai](https://github.com/heartcode2010/dark-obsydia-ai), commit `cd74724f930170abf04d2eeb3f10ee56459c38ee`. This is the selected self-hosted AI workspace and coding-agent foundation.
+### Implemented in the current UI foundation
+- Responsive TECHNOVA shell and compact navigation.
+- Overview pathways into Protect, FixIt, Opportunities, Portfolio and Business.
+- Protect area distinguishes new TECHNOVA work from the original HEARTCODE Scanner and Cyber Academy, whose service integration is pending.
+- FixIt intake draft UI (not yet account-backed or persisted).
+- Opportunity Radar empty state (no fabricated live listings).
+- Portfolio session drafts (not yet account-backed or persisted).
+- Business Launchpad / SME Health Check status presentation.
 
-The source repositories are not modified by TECHNOVA integration work. Their pinned revisions are intentional and must only be advanced after review. Dark Obsydia AI is Apache-2.0; preserve its LICENSE and NOTICE and comply with attribution and redistribution requirements.
+### Not yet implemented or verified
+- Authentication and connected database for this React app.
+- Server-side ScamShield analysis, FixIt recommendations and saved cases.
+- Verified live opportunity ingestion and moderation.
+- Persistent portfolio and SME assessment workflows.
+- Unified NOVA provider integration.
+- Runtime deployment of HEARTCODE and Dark Obsydia services.
+- Automated tests, production build verification and deployment.
 
-### Clone with the actual source code
+## Protected upstream products
+
+The original repositories are preserved as Git submodules. Do not alter protected Scanner or Academy source as part of TECHNOVA UI work.
+- HEARTCODE: vendor/heartcode-original
+- Dark Obsydia AI: vendor/dark-obsydia-ai
+
+Clone with submodules enabled:
 
 ```bash
 git clone --recurse-submodules https://github.com/heartcode2010/TECHNOVA.git
 cd TECHNOVA
-git submodule status
-```
-
-If already cloned:
-
-```bash
+git checkout import/heartcode-scanner-academy
 git submodule update --init --recursive
+npm ci
+npm run dev
 ```
 
-A normal GitHub source ZIP does not automatically include submodule contents; clone with `--recurse-submodules` to obtain the pinned source code.
+## Commands
+- npm run dev — local development
+- npm run typecheck — TypeScript check
+- npm run build — production build
+- npm run preview — preview production output
 
-## Non-negotiable preservation rules
+## Deployment
 
-The HEARTCODE Vulnerability Scanner and Cyber Academy remain protected flagship products. Do not redesign, rewrite, refactor, relocate, rebrand, replace, merge, or alter their UI, routes, wording, styling, component hierarchy, scanning workflow, learning content, or existing behaviour. TECHNOVA services must be additive and isolated. If a change appears to require touching either protected product, stop and obtain explicit owner approval.
+A Netlify configuration is included. Deploy only after build and typecheck pass in a clean checkout. This configuration does not mean a Netlify site has been created or deployed.
 
-The original HEARTCODE repository remains the source of truth. No destructive changes are to be made there.
+## Product scope and governance
 
-## Product execution
-
-TECHNOVA is not a decorative mega-dashboard. The full product journey is:
-
-**Discover → Diagnose → Learn → Practise → Prove → Match → Deliver → Transact → Grow.**
-
-Every module must solve a defined user problem end-to-end, with real persistence, permission checks, loading/error/success states, monitoring, tests, mobile QA and rollback steps before it is called complete. Do not fabricate AI output, opportunities, verification, payment status, monitoring or scan results.
-
-## Repository layout
-
-- `docs/` — product blueprint, architecture decisions, audit and release evidence.
-- `vendor/heartcode-original/` — pinned original HEARTCODE source (submodule).
-- `vendor/dark-obsydia-ai/` — pinned Dark Obsydia AI source (submodule).
-- `apps/` — TECHNOVA-owned user-facing applications.
-- `packages/` — shared TECHNOVA-owned contracts and utilities.
-- `services/` — TECHNOVA-owned backend modules and integrations.
-
-## Nigeria-first requirements
-
-Mobile-first Android experience, low-data and intermittent-connectivity support, NGN-first pricing, Nigerian phone formats and workflows, local opportunities and exam preparation, and compliant local payment-provider integrations. Pricing must be validated with real Nigerian users.
-
-## Launch discipline
-
-Follow the phased launch waves in `docs/PRODUCT_IMPLEMENTATION_ROADMAP.md`. Do not release every planned module as an unfinished shell. Do not claim production readiness without evidence from actual tests and end-to-end workflows.
+See docs/COMPLETE_PRODUCT_SCOPE.md, docs/PRODUCT_ARCHITECTURE.md, docs/DELIVERY_ROADMAP.md, docs/PROTECTED_PRODUCTS.md and docs/VERIFIED_SOURCE_LOCK.md. Planned features must remain labelled as planned until their complete user journey, security, persistence, tests and operations are verified.
