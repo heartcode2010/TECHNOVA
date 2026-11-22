@@ -1,7 +1,7 @@
 # TECHNOVA mobile application architecture
 
 ## Product decision
-TECHNOVA's primary client is a native mobile application, not a responsive website. Android is the first delivery target because the product is Nigeria-first; iOS is supported by the shared React Native codebase. A web client is not the product's primary experience.
+TECHNOVA's primary client is a native mobile application, not a responsive website. Android is the first delivery target because the product is Nigeria-first; iOS is supported by the shared React Native codebase. The existing root React/Vite client is a legacy prototype and is not the primary product.
 
 ## Client foundation
 - Expo SDK 58, React Native 0.88, Expo Router and TypeScript.
