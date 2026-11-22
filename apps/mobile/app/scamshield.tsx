@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, Pressable, View } from "react-native";
+import { Stack } from "expo-router";
 import { theme } from "@/theme";
 
 type Finding = { title: string; detail: string };
@@ -37,7 +38,7 @@ export default function ScamShieldScreen() {
   const [result,setResult]=useState<Result|null>(null);
   const ready=input.trim().length>=8;
   const title=useMemo(()=>result?.level==="high"?"Several warning indicators":result?.level==="caution"?"Some warning indicators":"No obvious indicators found", [result]);
-  return <ScrollView style={s.page} contentContainerStyle={s.body} keyboardShouldPersistTaps="handled">
+  return <><Stack.Screen options={{headerShown:true,title:"ScamShield",headerBackTitle:"Back",headerTintColor:theme.colors.ink,headerStyle:{backgroundColor:theme.colors.paper},headerShadowVisible:false}}/><ScrollView style={s.page} contentContainerStyle={s.body} keyboardShouldPersistTaps="handled">
     <Text style={s.eyebrow}>PROTECT / OFFLINE CHECK</Text>
     <Text style={s.title}>Pause. Check. Then act.</Text>
     <Text style={s.copy}>Review a suspicious message or link for common warning signs. This first version runs on your device and does not send your text anywhere.</Text>
@@ -54,7 +55,7 @@ export default function ScamShieldScreen() {
       <Text style={s.disclaimer}>This is an offline pattern check, not a live threat-intelligence lookup, forensic examination or guarantee of safety. Results can be incomplete.</Text>
     </View>}
     <Text style={s.footer}>No account or server storage in this build. Checks remain on this device session.</Text>
-  </ScrollView>;
+  </ScrollView></>;
 }
 const s=StyleSheet.create({
  page:{flex:1,backgroundColor:theme.colors.paper},body:{padding:22,paddingBottom:42},eyebrow:{fontSize:10,fontWeight:"900",letterSpacing:1.8,color:theme.colors.accent},title:{fontSize:31,fontWeight:"900",lineHeight:37,color:theme.colors.ink,marginTop:10},copy:{fontSize:13,lineHeight:21,color:theme.colors.muted,marginTop:10,marginBottom:18},

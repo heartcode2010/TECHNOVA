@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { ScrollView, StyleSheet, Text, Pressable, View } from "react-native";
+import { Stack } from "expo-router";
 import { theme } from "@/theme";
 
 const guides = [

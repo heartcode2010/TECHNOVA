@@ -8,7 +8,7 @@ function Tag({children,soft=false}:{children:string;soft?:boolean}) { return <Vi
 export default function HomeScreen() {
   const [query,setQuery] = useState("");
   const results = useMemo(()=>modules.filter(m=>m.name.toLowerCase().includes(query.toLowerCase())||m.description.toLowerCase().includes(query.toLowerCase())),[query]);
-  return <ScrollView style={s.page} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
+  return <SafeAreaView edges={["top"]} style={{flex:1,backgroundColor:theme.colors.paper}}><ScrollView style={s.page} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
     <View style={s.top}><View><Text style={s.brand}>TECHNOVA</Text><Text style={s.brandSub}>BY HEARTCODE TECHNOLOGIES</Text></View><View style={s.avatar}><Text style={s.avatarText}>G</Text></View></View>
     <View style={s.hero}><Tag>YOUR DIGITAL ADVANTAGE</Tag><Text style={s.heroTitle}>Make technology{"\n"}<Text style={s.heroAccent}>work for you.</Text></Text><Text style={s.heroCopy}>Protect your digital life. Build practical skills. Find opportunities. Turn what you know into real outcomes.</Text><Text style={s.heroFoot}>LEARN  ·  PROTECT  ·  BUILD  ·  EARN</Text></View>
     <View style={s.sectionHead}><Text style={s.sectionTitle}>Start with what you need</Text><Text style={s.sectionHint}>QUICK ACCESS</Text></View>
@@ -19,7 +19,7 @@ export default function HomeScreen() {
     <TextInput value={query} onChangeText={setQuery} placeholder="Search tools, learning, business…" placeholderTextColor={theme.colors.muted} style={s.search} />
     <FlatList scrollEnabled={false} data={results} keyExtractor={item=>item.slug} renderItem={({item})=><Link href={{pathname:"/module/[slug]",params:{slug:item.slug}}} asChild><Pressable style={s.listRow}><View style={s.listIcon}><Text style={s.listGlyph}>{item.pillar==="PROTECT"?"◈":item.pillar==="LEARN"?"▤":item.pillar==="EARN"?"↗":"⌘"}</Text></View><View style={{flex:1}}><Text style={s.listName}>{item.name}</Text><Text style={s.listDesc}>{item.description}</Text></View><Text style={s.chevron}>›</Text></Pressable></Link>} ListEmptyComponent={<Text style={s.empty}>No services match that search.</Text>} />
     <View style={s.footer}><Text style={s.footerTitle}>Built for Nigerian realities.</Text><Text style={s.footerCopy}>Low-data by design. Naira-first. Ready to grow beyond Nigeria.</Text></View>
-  </ScrollView>;
+  </ScrollView></SafeAreaView>;
 }
 const s=StyleSheet.create({
  page:{flex:1,backgroundColor:theme.colors.paper},content:{padding:20,paddingBottom:36},
