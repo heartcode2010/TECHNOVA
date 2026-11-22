@@ -3,14 +3,16 @@ import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } fr
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { modules } from "@/data/modules";
+import { useAuth } from "@/auth/AuthContext";
 import { theme } from "@/theme";
 const featured = ["nova","scanner","cyber-academy","scamshield","fixit","opportunity-radar","portfolio"];
 function Tag({children,soft=false}:{children:string;soft?:boolean}) { return <View style={[s.tag,soft&&s.tagSoft]}><Text style={[s.tagText,soft&&s.tagTextSoft]}>{children}</Text></View>; }
 export default function HomeScreen() {
+  const {user}=useAuth();
   const [query,setQuery] = useState("");
   const results = useMemo(()=>modules.filter(m=>m.name.toLowerCase().includes(query.toLowerCase())||m.description.toLowerCase().includes(query.toLowerCase())),[query]);
   return <SafeAreaView edges={["top"]} style={{flex:1,backgroundColor:theme.colors.paper}}><ScrollView style={s.page} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
-    <View style={s.top}><View><Text style={s.brand}>TECHNOVA</Text><Text style={s.brandSub}>BY HEARTCODE TECHNOLOGIES</Text></View><View style={s.avatar}><Text style={s.avatarText}>G</Text></View></View>
+    <View style={s.top}><View><Text style={s.brand}>TECHNOVA</Text><Text style={s.brandSub}>BY HEARTCODE TECHNOLOGIES</Text></View><Link href="/profile" asChild><Pressable style={s.avatar}><Text style={s.avatarText}>{user?.name?.charAt(0).toUpperCase() ?? "G"}</Text></Pressable></Link></View>
     <View style={s.hero}><Tag>YOUR DIGITAL ADVANTAGE</Tag><Text style={s.heroTitle}>Make technology{"\n"}<Text style={s.heroAccent}>work for you.</Text></Text><Text style={s.heroCopy}>Protect your digital life. Build practical skills. Find opportunities. Turn what you know into real outcomes.</Text><Text style={s.heroFoot}>LEARN  ·  PROTECT  ·  BUILD  ·  EARN</Text></View>
     <View style={s.sectionHead}><Text style={s.sectionTitle}>Start with what you need</Text><Text style={s.sectionHint}>QUICK ACCESS</Text></View>
     <View style={s.quickGrid}>
