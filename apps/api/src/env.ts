@@ -6,7 +6,6 @@ const schema = z.object({
   PORT: z.coerce.number().int().positive().default(8080),
   MONGODB_URI: z.string().min(1),
   JWT_ACCESS_SECRET: z.string().min(32),
-  JWT_REFRESH_SECRET: z.string().min(32),
   ALLOWED_ORIGINS: z.string().default(""),
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().optional(),
