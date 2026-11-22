@@ -1,9 +1,6 @@
 name: Copy protected source into TECHNOVA
 
 on:
-  push:
-    branches:
-      - import/heartcode-scanner-academy
   workflow_dispatch:
 
 permissions:
@@ -11,7 +8,6 @@ permissions:
 
 jobs:
   copy-source:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Check out TECHNOVA
@@ -36,19 +32,21 @@ jobs:
           echo "HEARTCODE_SHA=$HEARTCODE_SHA" >> "$GITHUB_ENV"
           echo "OBSYDIA_SHA=$OBSYDIA_SHA" >> "$GITHUB_ENV"
 
-      - name: Replace submodule pointers with complete local source trees
+      - name: Replace copied snapshots with the pinned source trees
         shell: bash
         run: |
-          git rm -f .gitmodules vendor/heartcode-original vendor/dark-obsydia-ai
+          git rm -f .gitmodules || true
+          git rm -f vendor/heartcode-original vendor/dark-obsydia-ai || true
+          git rm -r -f modules/heartcode modules/obsydia-ai || true
           mkdir -p modules
           git read-tree --prefix=modules/heartcode/ -u "$HEARTCODE_SHA"
           git read-tree --prefix=modules/obsydia-ai/ -u "$OBSYDIA_SHA"
           git add -A
-          git commit -m "Copy complete HEARTCODE and Dark Obsydia AI source into TECHNOVA"
+          git commit -m "Refresh complete protected source snapshots"
           git push origin HEAD:import/heartcode-scanner-academy
 
       - name: Report copied source revisions
         run: |
           echo "HEARTCODE source: $HEARTCODE_SHA"
           echo "Dark Obsydia AI source: $OBSYDIA_SHA"
-          echo "Both source trees are now stored as ordinary files inside this TECHNOVA repository."
+          echo "Both source trees are stored as ordinary files inside TECHNOVA."
