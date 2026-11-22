@@ -44,3 +44,12 @@ The initial middleware review found a release-blocking issue in the preserved ba
 **Do not expose the HEARTCODE backend directly to the public internet in this state.** The protected source has not been edited. Before any production integration, the deployment must isolate the backend behind a TECHNOVA gateway that fails closed, validates real user sessions, signs short-lived internal identity assertions, allowlists only approved routes, blocks administrative routes from ordinary users, and prevents direct network access to the service. Production secrets and the intended administrator identity must be explicitly configured. If a safe gateway cannot enforce these boundaries without modifying protected source, stop and request written permission to fix the source.
 
 This is a code-path finding, not a completed penetration test. A full route-by-route authorization review and negative tests are still required.
+
+## Existing infrastructure inventory (read-only inspection)
+
+- MongoDB Atlas has one free cluster in AWS `AF_SOUTH_1` (South Africa), MongoDB 8.0.39. The cluster currently contains only the default `admin` and `local` databases; no application database was present at inspection time.
+- The Atlas project access list currently includes a broad `0.0.0.0/0` entry, and the project has an existing database account with Atlas-wide administrative privileges. Neither should be reused for the TECHNOVA mobile API. Create a separate least-privilege application database user and narrow network access before production.
+- Two existing Railway projects contain HEARTCODE services. Their latest inspected deployments were failed; one service had no public domain and the other had a public Railway domain but a failed latest deployment. One project also contains an existing MongoDB service with a persistent volume.
+- These existing HEARTCODE Railway projects and database resources have not been changed. Do not repurpose or overwrite them as the TECHNOVA production environment.
+
+No TECHNOVA production service, database user, deployment or public domain has been created in this work.
