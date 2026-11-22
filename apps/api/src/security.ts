@@ -4,7 +4,7 @@ import { env } from "./env.js";
 
 export const hashToken = (value: string) => createHash("sha256").update(value).digest("hex");
 export const newOpaqueToken = () => randomBytes(48).toString("base64url");
-export const newFamilyId = () => randomUUID();
+export const newFamilyId = (): string => randomUUID();
 export function signAccessToken(user: { id: string; role: string }) {
   return jwt.sign({ sub: user.id, role: user.role, typ: "access" }, env.JWT_ACCESS_SECRET, {
     expiresIn: "15m", issuer: "technova-api", audience: "technova-mobile"
