@@ -9,7 +9,6 @@ const userSchema = new Schema({
   emailVerifiedAt: { type: Date, default: null },
   lastLoginAt: { type: Date, default: null }
 }, { timestamps: true, versionKey: false });
-userSchema.index({ email: 1 }, { unique: true });
 
 const refreshTokenSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "TechnovaUser", required: true, index: true },
@@ -19,16 +18,15 @@ const refreshTokenSchema = new Schema({
   revokedAt: { type: Date, default: null },
   userAgent: { type: String, maxlength: 300, default: "" }
 }, { timestamps: true, versionKey: false });
-refreshTokenSchema.index({ tokenHash: 1 }, { unique: true });
 
 const emailTokenSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "TechnovaUser", required: true, index: true },
   tokenHash: { type: String, required: true, unique: true },
   purpose: { type: String, enum: ["verify_email", "reset_password"], required: true },
-  expiresAt: { type: Date, required: true, index: true },
+  expiresAt: { type: Date, required: true },
   usedAt: { type: Date, default: null }
 }, { timestamps: true, versionKey: false });
-emailTokenSchema.index({ tokenHash: 1 }, { unique: true });
+emailTokenSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 export const User = model("TechnovaUser", userSchema);
 export const RefreshToken = model("TechnovaRefreshToken", refreshTokenSchema);
