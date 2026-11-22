@@ -1,5 +1,6 @@
 import { Link } from "expo-router";
 import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { modules } from "@/data/modules"; import { theme } from "@/theme";
 const ids=["scanner","cyber-academy","scamshield","website-guardian","technova-sos","trustcheck","devicecare","digital-vault"];
 export default function ProtectScreen(){return <SafeAreaView edges={["top"]} style={{flex:1,backgroundColor:theme.colors.paper}}><ScrollView style={s.page} contentContainerStyle={s.body}><Text style={s.eyebrow}>PILLAR 01</Text><Text style={s.title}>Protect what{"\n"}matters.</Text><Text style={s.copy}>Digital safety for people, devices and businesses. Your original HEARTCODE products remain protected and distinct.</Text>{ids.map(id=>{const m=modules.find(x=>x.slug===id)!;return <Link key={id} href={{pathname:"/module/[slug]",params:{slug:id}}} asChild><Pressable style={s.card}><View style={s.row}><Text style={s.name}>{m.name}</Text><Text style={s.arrow}>↗</Text></View><Text style={s.desc}>{m.description}</Text><Text style={s.pillar}>{m.status==="protected"?"ORIGINAL HEARTCODE · PRESERVED":m.status==="foundation"?"FOUNDATION":"PLANNED SERVICE"}</Text></Pressable></Link>})}</ScrollView></SafeAreaView>}
