@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { modules } from "@/data/modules";
 import { theme } from "@/theme";
