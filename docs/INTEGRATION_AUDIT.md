@@ -31,3 +31,16 @@ Run the protected HEARTCODE frontend/backend and Dark Obsydia AI as isolated run
 - Establish a service identity and token/session exchange for native mobile use without weakening either service's existing authentication.
 - Verify Scanner and Academy routes, screenshots and scan results before and after integration.
 - Benchmark Ollama/Qwen memory, latency and cost on the selected server before enabling NOVA for public users.
+
+## Critical HEARTCODE security blockers
+
+The initial middleware review found a release-blocking issue in the preserved backend source:
+
+- `modules/heartcode/backend/src/middleware/auth.middleware.ts`: `authenticateToken` assigns a hard-coded local operator with the admin role when the Authorization header is missing. It also falls back to that operator when a supplied token is invalid.
+- In the same file, `requireRole` accepts a list of roles but does not check the authenticated user's role before calling `next()`.
+- `modules/heartcode/backend/src/controllers/auth.controller.ts` and the middleware contain predictable fallback JWT secrets if production environment variables are absent.
+- The auth controller also contains a hard-coded default administrator email if `ADMIN_EMAIL` is not configured.
+
+**Do not expose the HEARTCODE backend directly to the public internet in this state.** The protected source has not been edited. Before any production integration, the deployment must isolate the backend behind a TECHNOVA gateway that fails closed, validates real user sessions, signs short-lived internal identity assertions, allowlists only approved routes, blocks administrative routes from ordinary users, and prevents direct network access to the service. Production secrets and the intended administrator identity must be explicitly configured. If a safe gateway cannot enforce these boundaries without modifying protected source, stop and request written permission to fix the source.
+
+This is a code-path finding, not a completed penetration test. A full route-by-route authorization review and negative tests are still required.
