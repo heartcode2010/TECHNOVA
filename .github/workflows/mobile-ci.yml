@@ -13,9 +13,16 @@ on:
       - ".github/workflows/mobile-ci.yml"
   workflow_dispatch:
 
+concurrency:
+  group: technova-mobile-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   android-debug-apk:
     runs-on: ubuntu-latest
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
     defaults:
       run:
         working-directory: apps/mobile
@@ -28,8 +35,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - uses: android-actions/setup-android@v3
-      - run: sdkmanager "platforms;android-37" "build-tools;37.0.0" "platform-tools"
+      - run: $ANDROID_HOME/cmdline-tools/16.0/bin/sdkmanager --sdk_root=$ANDROID_HOME "platforms;android-37" "build-tools;37.0.0" "platform-tools"
       - run: npm install
       - run: npx expo install --check
       - run: npx expo-doctor
