@@ -18,8 +18,16 @@ npx expo start
 
 Use an Android development build for device testing. An Expo Go session is useful for early UI iteration but is not a release build.
 
-## Build
-Configure an Expo Application Services (EAS) project and credentials before producing signed Android App Bundles or iOS archives. Never commit signing credentials or provider secrets.
+## Current mobile foundation
+- Native Home, Protect, Learn, Build and Earn tabs.
+- Searchable catalogue for the TECHNOVA ecosystem and signature concepts.
+- Dedicated service detail screens with honest implementation labels.
+- Offline ScamShield first-pass checks for urgency, credential requests, upfront payment language and a few suspicious URL characteristics.
+- Offline FixIt checklists for common phone, laptop and connectivity issues.
+- Protected Scanner and Cyber Academy remain marked as original services; they are not replaced by native lookalikes.
 
-## Current scope
-This is the first native mobile foundation: navigation, mobile design tokens, module catalogue and transparent status/detail screens. It does not yet provide authentication, server persistence, live scam analysis, live opportunities, payments or the integrated original HEARTCODE/Dark Obsydia runtime. These are separate delivery workstreams.
+## Important limitations
+ScamShield is an offline indicator check, not a live threat-intelligence lookup or guarantee of safety. FixIt currently offers a small set of safe checklists, not account-backed case history or remote support. Neither currently syncs data to a server. Authentication, server persistence, verified opportunities, payments, NOVA and protected-service runtime integration remain future delivery work.
+
+## Build
+The GitHub Actions workflow checks Expo dependencies, Expo configuration, TypeScript and Android bundling, then attempts a native Android debug APK build. A signed production Android App Bundle and iOS archive require configured signing/build credentials. No store release is claimed.
