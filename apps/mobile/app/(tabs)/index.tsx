@@ -3,7 +3,7 @@ import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } fr
 import { Link } from "expo-router";
 import { modules } from "@/data/modules";
 import { theme } from "@/theme";
-const featured = ["scanner","cyber-academy","scamshield","fixit","opportunity-radar","portfolio"];
+const featured = ["nova","scanner","cyber-academy","scamshield","fixit","opportunity-radar","portfolio"];
 function Tag({children,soft=false}:{children:string;soft?:boolean}) { return <View style={[s.tag,soft&&s.tagSoft]}><Text style={[s.tagText,soft&&s.tagTextSoft]}>{children}</Text></View>; }
 export default function HomeScreen() {
   const [query,setQuery] = useState("");
