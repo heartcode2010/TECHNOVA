@@ -6,7 +6,7 @@ TECHNOVA is a Nigeria-first digital problem-solving ecosystem by Heartcode Techn
 
 ## Primary product: native mobile app
 
-The active mobile application lives in `apps/mobile/` and uses Expo SDK 58, React Native 0.88, Expo Router and TypeScript.
+The active mobile application lives in `apps/mobile/` and uses Expo SDK 58, React Native 0.88, Expo Router, TypeScript and SecureStore. The separate identity API scaffold lives in `apps/api/` and uses Express 5, MongoDB/Mongoose, email verification and rotating refresh tokens.
 
 ```bash
 cd apps/mobile
@@ -36,6 +36,6 @@ The complete product scope is recorded in `docs/COMPLETE_PRODUCT_SCOPE.md`. Rele
 
 ## Current status
 
-The native mobile foundation currently contains the app navigation, design tokens, module catalogue and service status/detail screens. It does not yet provide authentication, production APIs, database persistence, live ScamShield analysis, verified live opportunities, payments, or the integrated HEARTCODE/Dark Obsydia runtime. No signed app build or store release is claimed.
+The native mobile foundation contains the app navigation, module catalogue, offline ScamShield and FixIt starter workflows, and native account screens. The identity API code passes typecheck/build CI but is not deployed; no production MongoDB credentials, JWT secrets, email provider or API URL are configured. Live ScamShield intelligence, account-backed FixIt cases, verified opportunities, payments, NOVA, and protected-service runtime integration remain outstanding. No signed production app build or store release is claimed.
 
 The source-copy branch and mobile work are separate. The active mobile branch is `mobile/technova-native`.
