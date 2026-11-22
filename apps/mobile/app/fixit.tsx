@@ -14,7 +14,7 @@ export default function FixItScreen(){
  const [selected,setSelected]=useState("internet");
  const [done,setDone]=useState<number[]>([]);
  const guide=useMemo(()=>guides.find(g=>g.id===selected)!,[selected]);
- return <ScrollView style={s.page} contentContainerStyle={s.body}>
+ return <><Stack.Screen options={{headerShown:true,title:"FixIt",headerBackTitle:"Back",headerTintColor:theme.colors.ink,headerStyle:{backgroundColor:theme.colors.paper},headerShadowVisible:false}}/><ScrollView style={s.page} contentContainerStyle={s.body}>
   <Text style={s.eyebrow}>FIXIT / OFFLINE GUIDE</Text>
   <Text style={s.title}>Let's troubleshoot safely.</Text>
   <Text style={s.copy}>Choose the closest problem and work through the reversible checks first. No reset, data deletion or risky commands are included.</Text>
@@ -25,7 +25,7 @@ export default function FixItScreen(){
   <Pressable onPress={()=>setDone([])} style={s.reset}><Text style={s.resetText}>Reset checklist</Text></Pressable>
   <View style={s.safety}><Text style={s.safetyTitle}>Stop if a step feels unsafe</Text><Text style={s.safetyText}>Do not open a device, bypass security, install unknown apps or run commands from strangers. Factory resets and data deletion require a verified backup and explicit confirmation.</Text></View>
   <Text style={s.footer}>This guide works offline. Your checklist is temporary and is not yet saved to a TECHNOVA account or support case.</Text>
- </ScrollView>;
+ </ScrollView></>;
 }
 const s=StyleSheet.create({
  page:{flex:1,backgroundColor:theme.colors.paper},body:{padding:22,paddingBottom:42},eyebrow:{fontSize:10,fontWeight:"900",letterSpacing:1.8,color:theme.colors.accent},title:{fontSize:30,lineHeight:36,fontWeight:"900",color:theme.colors.ink,marginTop:10},copy:{fontSize:13,lineHeight:21,color:theme.colors.muted,marginTop:10,marginBottom:20},label:{fontSize:10,fontWeight:"900",letterSpacing:1,color:theme.colors.muted,marginBottom:8},
