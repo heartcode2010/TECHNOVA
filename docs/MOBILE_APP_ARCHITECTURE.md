@@ -21,15 +21,14 @@ TECHNOVA's primary client is a native mobile application, not a responsive websi
 These foundations are not equivalent to a production release. The offline ScamShield check does not query live threat feeds, and FixIt does not yet persist support cases or dispatch technicians.
 
 ## Delivery boundaries
-1. Complete and verify the native Android build; run device QA on representative Android phones and constrained networks.
-2. Identity, session security, user profile and consent.
-3. Backend API and MongoDB data ownership; tenant isolation and audit trail.
-4. ScamShield and FixIt complete, account-backed workflows.
-5. Opportunity Radar with editorial verification, sources and reminders.
-6. Portfolio and Business Launchpad persistence.
-7. Original Scanner and Cyber Academy service integration with protected-source regression tests.
-8. Dark Obsydia AI/NOVA integration with scoped user identity, metering, prompt-injection controls and private-data isolation.
-9. Remaining product modules delivered in the roadmap's release waves.
+1. Complete and verify the native Android APK build; run device QA on representative Android phones and constrained networks.
+2. Configure and deploy the identity API, MongoDB user with least privilege, JWT secret, email sender domain and API URL; add MFA, session management, audit events and integration tests.
+3. Add persistent FixIt cases and ScamShield evidence history, then integrate live reputation/threat-intelligence sources with clear uncertainty.
+4. Opportunity Radar with verified sources, editorial review, deadlines and application tracking.
+5. Portfolio and Business Launchpad persistence, document export and business records.
+6. Integrate the protected Scanner and Cyber Academy through an externally secured gateway and regression tests; do not expose the current HEARTCODE backend directly.
+7. Integrate the complete Dark Obsydia AI runtime as NOVA with scoped user identity, model metering, prompt-injection controls and private-data isolation.
+8. Build remaining product modules in the release waves from the master product brief.
 
 ## Non-negotiable release gates
 - Real end-to-end user task and persistent server-side state where required.
@@ -42,4 +41,4 @@ These foundations are not equivalent to a production release. The offline ScamSh
 - No claim of Play Store publication until review and listing are verified.
 
 ## Current status
-The native mobile foundation is in active development on `mobile/technova-native`. The complete TECHNOVA product is not yet finished or released.
+The native mobile foundation and separate identity API scaffold are in active development on `mobile/technova-native`. Expo Doctor, TypeScript and Android JavaScript bundle export have passed on the current mobile CI run; the native Gradle debug APK build is still being verified. The identity API code typecheck/build passes but is not deployed or configured with production credentials. The complete TECHNOVA product is not yet finished or released.
