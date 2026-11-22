@@ -13,7 +13,7 @@ export default function HomeScreen() {
     <View style={s.hero}><Tag>YOUR DIGITAL ADVANTAGE</Tag><Text style={s.heroTitle}>Make technology{"\n"}<Text style={s.heroAccent}>work for you.</Text></Text><Text style={s.heroCopy}>Protect your digital life. Build practical skills. Find opportunities. Turn what you know into real outcomes.</Text><Text style={s.heroFoot}>LEARN  ·  PROTECT  ·  BUILD  ·  EARN</Text></View>
     <View style={s.sectionHead}><Text style={s.sectionTitle}>Start with what you need</Text><Text style={s.sectionHint}>QUICK ACCESS</Text></View>
     <View style={s.quickGrid}>
-      {featured.map((slug,i)=>{const m=modules.find(x=>x.slug===slug)!;return <Link key={slug} href={{pathname:"/module/[slug]",params:{slug}}} asChild><Pressable style={s.quickCard}><Text style={s.quickGlyph}>{["◈","▤","!","⌁","↗","▣"][i]}</Text><Text style={s.quickName}>{m.name}</Text><Text style={s.quickDesc}>{m.description}</Text><Text style={s.open}>OPEN  ↗</Text></Pressable></Link>;})}
+      {featured.map((slug,i)=>{const m=modules.find(x=>x.slug===slug)!;return <Link key={slug} href={{pathname:"/module/[slug]",params:{slug}}} asChild><Pressable style={s.quickCard}><Text style={s.quickGlyph}>{["✦","◈","▤","!","⌁","↗","▣"][i]}</Text><Text style={s.quickName}>{m.name}</Text><Text style={s.quickDesc}>{m.description}</Text><Text style={s.open}>OPEN  ↗</Text></Pressable></Link>;})}
     </View>
     <View style={s.sectionHead}><Text style={s.sectionTitle}>Explore TECHNOVA</Text><Tag soft>{modules.length} SERVICES</Tag></View>
     <TextInput value={query} onChangeText={setQuery} placeholder="Search tools, learning, business…" placeholderTextColor={theme.colors.muted} style={s.search} />
