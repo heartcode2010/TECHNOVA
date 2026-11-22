@@ -25,7 +25,7 @@ Last updated: 22 November 2026
 - [ ] Configure signed production builds and Play Console release process.
 
 ## Backend and service integration — outstanding
-- [ ] Unified authentication, secure sessions, MFA and account recovery.
+- [x] Separate TECHNOVA identity API scaffold: email verification, bcrypt password hashing, 15-minute access tokens, rotating hashed refresh tokens, logout, password reset and protected profile endpoint. API typecheck and production TypeScript build pass.\n- [ ] Configure production database access, JWT secrets, Resend sender domain/API key and deploy the API.\n- [ ] Add MFA, device/session management, security audit events and full auth integration tests.
 - [ ] Root TECHNOVA API and MongoDB persistence with tenant isolation and audit logs.
 - [ ] ScamShield live reputation/threat-intelligence checks, safe uploads, reporting and moderation.
 - [ ] FixIt account-backed cases, diagnostics, resolution confirmation and technician workflow.
@@ -37,7 +37,7 @@ Last updated: 22 November 2026
 - [ ] Complete production security review, backup/restore, observability, support operations and mobile QA.
 
 ## Important limitations
-The native app is a working development foundation, not a finished commercial app. The offline ScamShield checker is a limited pattern review and must not be presented as proof that a link is safe. FixIt checklists are temporary local state and do not create saved cases. The module catalogue does not mean every listed service is implemented. No production backend, live NOVA connection, signed APK/AAB, Play Store listing or production deployment is claimed.
+The native app is a working development foundation, not a finished commercial app. The offline ScamShield checker is a limited pattern review and must not be presented as proof that a link is safe. FixIt checklists are temporary local state and do not create saved cases. The module catalogue does not mean every listed service is implemented. The identity API code now exists and its CI typecheck/build passes, but it is not deployed and has no production database or email credentials. No live NOVA connection, signed production APK/AAB, Play Store listing or production deployment is claimed.
 
 ## Protected source rules
 Treat `modules/heartcode/` and `modules/obsydia-ai/` as immutable source snapshots. Integrations must be additive and live outside those copied source trees unless explicit approval is given. The Scanner and Cyber Academy UI and behaviour must remain unchanged.
