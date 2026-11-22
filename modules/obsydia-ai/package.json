@@ -1,0 +1,43 @@
+{
+  "name": "dark-obsydia-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted AI workspace with a local Qwen model: chat, coding agent, project generation, live previews, ZIP artifacts and a developer API.",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace backend & npm run dev --workspace frontend",
+    "build": "npm run build --workspace frontend && npm run build --workspace backend",
+    "start": "npm run start --workspace backend",
+    "test": "npm run test --workspace backend",
+    "typecheck": "npm run typecheck --workspace backend && npm run typecheck --workspace frontend"
+  },
+  "author": "Inconnu Boy Sensei (https://github.com/INCONNU-BOY-SENSEI)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/INCONNU-BOY-SENSEI/dark-obsydia-ai.git"
+  },
+  "homepage": "https://github.com/INCONNU-BOY-SENSEI/dark-obsydia-ai",
+  "bugs": {
+    "url": "https://github.com/INCONNU-BOY-SENSEI/dark-obsydia-ai/issues"
+  },
+  "keywords": [
+    "ai",
+    "self-hosted",
+    "ollama",
+    "qwen",
+    "llm",
+    "chatbot",
+    "code-generation",
+    "mongodb",
+    "react",
+    "express",
+    "typescript"
+  ]
+}

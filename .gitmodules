@@ -1,6 +1,0 @@
-[submodule "vendor/heartcode-original"]
-	path = vendor/heartcode-original
-	url = https://github.com/heartcode2010/HEARTCODE.git
-[submodule "vendor/dark-obsydia-ai"]
-	path = vendor/dark-obsydia-ai
-	url = https://github.com/heartcode2010/dark-obsydia-ai.git
