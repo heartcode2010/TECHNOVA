@@ -15,10 +15,11 @@
       "package": "com.heartcode.technova",
       "adaptiveIcon": {
         "backgroundColor": "#F4F1EA"
-      },
-      "edgeToEdgeEnabled": true
+      }
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "experiments": {
       "typedRoutes": true
     }
